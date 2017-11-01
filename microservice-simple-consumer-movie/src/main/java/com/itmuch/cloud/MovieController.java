@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 @RestController
 public class MovieController {
 
@@ -19,12 +21,30 @@ public class MovieController {
 
 	@Autowired
 	private DiscoveryClient discoveryClient;
+
 	@Autowired
 	private LoadBalancerClient loadBalancerClient;
 
-	@GetMapping("/user/{id}")
+	@Autowired
+	private UserFeignClient userFeignClient;
+
+	@HystrixCommand(fallbackMethod = "findByIdFallback")
+	@GetMapping(value = "/user/{id}", produces = { "application/json;charset=UTF-8" })
 	public User findById(@PathVariable Long id) {
-		return this.restTemplate.getForObject("http://microservice-provider-user/" + id, User.class);
+		User forObject = this.restTemplate.getForObject("http://microservice-provider-user/" + id, User.class);
+		return forObject;
+	}
+
+	public User findByIdFallback(Long id) {
+		User user = new User();
+		user.setId(-1L);
+		user.setName("default user");
+		return user;
+	}
+
+	@GetMapping("/user1/{id}")
+	public User findById1(@PathVariable Long id) {
+		return this.userFeignClient.findById(id);
 	}
 
 	@GetMapping("/user-instance")
