@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableDiscoveryClient // 注册服务
 @EnableFeignClients // 声明式REST
-@EnableCircuitBreaker // 容错处理(容断)
+@EnableCircuitBreaker // 容错处理(断路器)
 @SpringBootApplication
 public class ConsumerMovieApplication {
 
