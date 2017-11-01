@@ -9,9 +9,9 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@EnableDiscoveryClient
-@EnableFeignClients
-@EnableCircuitBreaker
+@EnableDiscoveryClient // 注册服务
+@EnableFeignClients // 声明式REST
+@EnableCircuitBreaker // 容错处理(容断)
 @SpringBootApplication
 public class ConsumerMovieApplication {
 

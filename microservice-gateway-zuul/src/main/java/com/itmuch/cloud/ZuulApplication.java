@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 public class ZuulApplication {
 
 	@Bean
-	@LoadBalanced
+	@LoadBalanced // 负载均衡
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
