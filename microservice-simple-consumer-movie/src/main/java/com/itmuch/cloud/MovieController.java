@@ -53,10 +53,15 @@ public class MovieController {
 		return instancesById;
 	}
 
+	@HystrixCommand(fallbackMethod = "findByIdFallback1")
 	@GetMapping("/log-instance")
 	public String logUserInstance() {
 		ServiceInstance instancesById = loadBalancerClient.choose("microservice-provider-user");
 		return String.format("%s:%s:%s", instancesById.getServiceId(), instancesById.getHost(),
 				instancesById.getPort());
+	}
+
+	public String findByIdFallback1() {
+		return "";
 	}
 }
