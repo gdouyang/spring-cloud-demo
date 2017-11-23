@@ -2,8 +2,6 @@ server:
   port: 8000
   
 spring:
-  application:
-    name: microservice-provider-user
   jpa:
     generate-ddl: false
     show-sql: true
@@ -19,11 +17,11 @@ logging:
     org.hibernate: info
     org.hibernate.type.descriptor.sql.BasicBinder: trace
     org.hibernate.type.descriptor.sql.BasicExtractor: trace
-    
+# 服务注册，这里的配置为被bootstrap.yml的覆盖
 eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8762/eureka/
