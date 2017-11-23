@@ -15,3 +15,12 @@ spring-boot-starter-actuator健康检查
 spring-cloud-starter-hystrix断路器与监控
 
 spring-cloud-starter-turbine聚合监控数据
+
+启动顺序
+1. microservice-discovery-eureka
+2. microservice-config-server
+3. microservice-simple-provider-user
+4. microservice-simple-consumer-movie
+5. microservice-hystrix-dashboard
+6. microservice-hystrix-turbine
+7. microservice-gateway-zuul
