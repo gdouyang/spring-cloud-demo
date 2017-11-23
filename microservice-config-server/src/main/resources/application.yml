@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: microservice-config-server
+  cloud:
+    config:
+      server:
+        git:
+          # 配置git仓库的地址
+          uri: ssh://git@10.28.55.37:10022/gdouyang/demo.git
+          # git账号
+          username: gdouyang
+          # git密码
+          password: bmeB4000
