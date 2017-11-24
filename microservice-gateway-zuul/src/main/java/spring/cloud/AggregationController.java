@@ -33,6 +33,24 @@ public class AggregationController {
 		return this.toDeferredResult(result);
 	}
 
+	/**
+	 * <code>
+	 * Observable.zip(this.aggregationService.getUserById(id), this.aggregationService.getMovieUserById(id),
+				new Func2<User, User, HashMap<String, User>>() {
+					&#64;Override
+					public HashMap<String, User> call(User user, User movieUser) {
+	
+						HashMap<String, User> map = Maps.newHashMap();
+						map.put("user", user);
+						map.put("movieUser", movieUser);
+						return map;
+					}
+				});
+	 * </code>
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Observable<HashMap<String, User>> aggregateObservable(Long id) {
 		return Observable.zip(this.aggregationService.getUserById(id), this.aggregationService.getMovieUserById(id),
 				(user, movieUser) -> {
