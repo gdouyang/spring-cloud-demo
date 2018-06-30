@@ -15,6 +15,9 @@ public class UserController {
 	@GetMapping("/{id}")
 	public User findById(@PathVariable Long id) {
 		User findOne = this.userRepository.findOne(id);
+		if(id == 1L) {
+			throw new RuntimeException("");
+		}
 		return findOne;
 	}
 
